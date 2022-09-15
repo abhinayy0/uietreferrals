@@ -1,0 +1,39 @@
+/* bg */
+
+position: absolute;
+width: 1440px;
+height: 330px;
+left: 0px;
+top: 72px;
+
+/* bg */
+
+position: absolute;
+width: 1440px;
+height: 358px;
+left: 0px;
+top: 0px;
+
+background: linear-gradient(180deg, #7625b6 0%, #3925b6 100%);
+
+/* mask */
+
+position: absolute;
+width: 1440px;
+height: 358px;
+left: 0px;
+top: 0px;
+
+/* white */
+background: #ffffff;
+
+/* image */
+
+position: absolute;
+width: 1440px;
+height: 961px;
+left: 0px;
+top: -320px;
+
+background: url(sharon-mccutcheon-p203ekCK4Ac-unsplash.jpg);
+background-blend-mode: soft-light;
