@@ -1,13 +1,17 @@
 import React from "react";
 
-import { Card, Avatar, Divider } from "antd";
+import { Card, Avatar } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
 const JobCard = (props) => (
   <>
-    <Card bordered={false} style={{ width: "70%", margin: "auto" }}>
+    <Card
+      bordered={true}
+      style={{ width: "70%", margin: "auto" }}
+      actions={[<HeartOutlined />, <div>{props.postDate}</div>]}
+    >
       <Meta
         avatar={<Avatar src={props.companyAvatar} />}
         title={
@@ -24,12 +28,28 @@ const JobCard = (props) => (
       />
 
       <p>
-        <b>{props.job}</b>
+        <a
+          href={props.jobLink}
+          target="_blank"
+          rel="noreferrer"
+          className="custom-link"
+        >
+          <b>{props.job}</b>
+        </a>
         <br />
         {props.description}
       </p>
-      <HeartOutlined />
-      <Divider />
+      <p>
+        Referral :{" "}
+        <a
+          href={props.referralLink}
+          target="_blank"
+          rel="noreferrer"
+          className="custom-link"
+        >
+          {props.referralName}
+        </a>
+      </p>
     </Card>
   </>
 );

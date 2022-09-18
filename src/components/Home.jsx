@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 import { Layout, Menu, Input, Divider } from "antd";
 import { SearchOutlined, CaretDownOutlined } from "@ant-design/icons";
 
@@ -12,33 +12,37 @@ const suffix = (
     <CaretDownOutlined />
   </div>
 );
+const baseURL =
+  "https://raw.githubusercontent.com/abhinayy0/uietreferrals/main/data.json";
 
 function Home() {
-  const [jobData, setjobData] = useState();
-
+  const [jobData, setjobData] = useState(null);
+  const getJobs = async () => {
+    const resp = await axios.get(baseURL);
+    setjobData(resp.data.record);
+  };
   useEffect(() => {
-    setjobData([
-      {
-        company: "Osmania Technologies",
-        country: "India",
-        job: "Python Developer",
-        description: "Seeking a passionate developer",
-        companyAvatar: "https://joeschmoe.io/api/v1/random",
-      },
-      {
-        company: "Osmania Tech",
-        country: "India",
-        job: "Python Developer",
-        description: "Seeking a passionate developer",
-        companyAvatar: "https://joeschmoe.io/api/v1/random",
-      },
-    ]);
+    if (!jobData) {
+      getJobs();
+    }
   }, []);
   return (
     <Layout className="layout">
-      <Header>
-        <div className="logo">UIET referrals</div>
+      <Header
+        style={{
+          background: "white",
+          height: "75px",
+          paddingTop: "7px",
+        }}
+      >
+        <div className="logo">UIET Referrals</div>
         <Menu
+          style={{
+            float: "right",
+            marginTop: "7px",
+            marginBottom: "7px",
+            height: "45px",
+          }}
           theme="light"
           mode="horizontal"
           defaultSelectedKeys={[]}
@@ -47,6 +51,7 @@ function Home() {
             return {
               key,
               label: "Post a job",
+              className: "customclass",
             };
           })}
         />
@@ -55,14 +60,38 @@ function Home() {
       <Content>
         <div
           style={{
-            aspectRatio: "32/5",
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1580566176138-daa588058b59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80),linear-gradient(180deg, #7625B6 0%, #3925B6 100%)",
+            background:
+              "linear-gradient(180deg, rgba(118, 37, 182, 0.9) 0%, rgba(95, 37, 182, 0.9) 100%), url(https://images.unsplash.com/photo-1580566176138-daa588058b59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80)",
+            backgroundSize: "cover",
+            paddingTop: "50px",
+            paddingBottom: "100px",
+            color: "white",
+            fontFamily: "Helvetica Neue",
+
+            fontWeight: "700",
+            fontSize: "48px",
+            lineHeight: "120%",
+            textAlign: "center",
           }}
-        ></div>
+        >
+          <br />
+
+          <b>Top jobs board for professionals</b>
+
+          <div
+            style={{
+              fontWeight: "400",
+              fontSize: "16px",
+              lineHeight: "150%",
+            }}
+          >
+            Discover your next career move with over 15 000 opening vacancies,
+            customer support, software, design anywhere in the world or
+            remotely.
+          </div>
+        </div>
         <br />
 
-        <Divider />
         <div style={{ margin: "auto", width: "70%" }}>
           <Input
             size="large"
@@ -82,7 +111,15 @@ function Home() {
           textAlign: "center",
         }}
       >
-        UIET Referrals ©2022 Created by Abhinay Yadav
+        UIET Referrals ©2022 Created by{" "}
+        <a
+          href="https://www.linkedin.com/in/abhinayy0/"
+          target="_blank"
+          rel="noreferrer"
+          className="creator"
+        >
+          Abhinay Yadav
+        </a>
       </Footer>
     </Layout>
   );
