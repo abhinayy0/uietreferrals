@@ -1,7 +1,7 @@
 <p align="center">
   <p align="center">
     <a href="https://github.com/abhinayy0/uietreferrals" target="_blank">
-          <img src="./uietreferrals/public/apple-touch-icon.png" alt="UIET" height="72">
+          <img src="./public/apple-touch-icon.png" alt="UIET" height="72">
     </a>
   </p>
   <p align="center">
