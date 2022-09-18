@@ -15,6 +15,10 @@ UIET Referrals provides you information with the latest jobs, for which you can 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Deployment
+
+UIET Referrals is live using github-pages at [uiet](https://abhinayy0.github.io/uietreferrals/).
+
 <!-- CONTRIBUTING -->
 
 ## Contributing
