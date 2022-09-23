@@ -1,31 +1,61 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Layout, Menu, Input, Divider } from "antd";
-import { SearchOutlined, CaretDownOutlined } from "@ant-design/icons";
+import { Layout, Menu, Input, Select } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 import JobCard from "./JobCard";
 
 const { Header, Content, Footer } = Layout;
-const suffix = (
-  <div>
-    Sort by: Latest
-    <CaretDownOutlined />
-  </div>
-);
+const { Option } = Select;
+
 const baseURL =
   "https://raw.githubusercontent.com/abhinayy0/uietreferrals/main/data.json";
 
 function Home() {
   const [jobData, setjobData] = useState(null);
+  const [sortType, setSortType] = useState("latest");
   const getJobs = async () => {
     const resp = await axios.get(baseURL);
     setjobData(resp.data.record);
   };
+
+  const suffix = (
+    <div
+      style={{
+        paddingRight: "7px",
+      }}
+    >
+      Sort by:
+      <Select defaultValue="latest" onChange={(v) => setSortType(v)}>
+        <Option value="latest">Latest</Option>
+        <Option value="alpha">Alphabetically</Option>
+      </Select>
+    </div>
+  );
+  useEffect(() => {}, []);
+
   useEffect(() => {
     if (!jobData) {
       getJobs();
+      return;
     }
-  }, []);
+
+    const sortArray = (type) => {
+      const types = {
+        latest: "uid",
+        alpha: "job",
+      };
+      const sortProperty = types[type];
+
+      const sorted = [...jobData].sort(
+        (a, b) => b[sortProperty] - a[sortProperty]
+      );
+      setjobData(sorted);
+    };
+
+    sortArray(sortType);
+  }, [sortType]);
+
   return (
     <Layout className="layout">
       <Header
