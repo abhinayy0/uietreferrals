@@ -16,15 +16,11 @@ function Home() {
   const [sortType, setSortType] = useState("latest");
   const getJobs = async () => {
     const resp = await axios.get(baseURL);
-    setjobData(resp.data.record);
+    setjobData(resp.data);
   };
 
   const suffix = (
-    <div
-      style={{
-        paddingRight: "7px",
-      }}
-    >
+    <div>
       Sort by:
       <Select defaultValue="latest" onChange={(v) => setSortType(v)}>
         <Option value="latest">Latest</Option>
